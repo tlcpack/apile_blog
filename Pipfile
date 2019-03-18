@@ -5,9 +5,12 @@ verify_ssl = true
 
 [dev-packages]
 prospector = "*"
+pylint = "*"
 
 [packages]
 django = "*"
+dj-database-url = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"
