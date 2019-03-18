@@ -66,6 +66,5 @@ Next, there's polish work to be done -- making sure messages are in place, addin
 
 - [Font Awesome Icons](https://fontawesome.com/)
 - [Faker](https://faker.readthedocs.io/en/master/) and [Mimesis](https://mimesis.readthedocs.io/)
-- [django-simple-pagination](https://django-simple-pagination.readthedocs.io/en/latest/)
 - [Django-Gravatar](https://github.com/twaddington/django-gravatar/) -- add user avatars!
 - [django-find](https://github.com/knipknap/django-find) -- add search
