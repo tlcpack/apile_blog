@@ -9,6 +9,6 @@
 <br>
 
 {% for comment in post.comments.all %}
-    <p><a href=''>{{ comment.user.username }}</a> on {{ comment.date_added }}</p>
+    <p><a href=''>{{ comment.author.name }}</a> on {{ comment.comment_date_added }}</p>
     <p>{{ comment.content }}<p>
 {% endfor %}
