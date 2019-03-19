@@ -4,13 +4,14 @@ from django.urls import reverse
 # Create your models here.
 
 class Post(models.Model):
-    """Model representing a user post"""
+    """Model representing a post"""
 
     # title of post
     title = models.CharField(max_length=250)
 
-    # user/author of post
-    user = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+    # author of post - should we call user author because of default Django User model. 
+    # maybe create Author model and establish Author - User 1:1 relationship
+    author = models.ForeignKey('Author', on_delete=models.SET_NULL, null=True, related_name="posts")
 
     # text content of post
     content = models.TextField(max_length=1000)
@@ -20,17 +21,10 @@ class Post(models.Model):
 
     # date and time of post
     date_added = models.DateTimeField(auto_now_add=True)
-
-    # comment field - may not be necessary here
-    # comment = models.ManyToManyField(Comment, null=True, blank=True, help_text="What do you think about this post?")
-    # comment = models.ForeignKey('Comment', on_delete=SET_NULL, null=True, help_text="What do you think about this post?")
-
-    # votes - may not be necessary here
-    # vote_by = models.ManyToManyField(to=User, through='Vote')
     
     # adjusting the ordering so most recent is on top
     class Meta:
-        ordering = ['-date']
+        ordering = ['-date_added']
 
     def __str__(self):
         return self.title
@@ -38,9 +32,9 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('post-detail', args=[str(self.id)])
 
-class User(models.Model):
-    """Model representing a user who can comment and write content"""
-    # name of user
+class Author(models.Model):
+    """Model representing a author who can comment and write content"""
+    # name of author
     name = models.CharField(max_length=100)
 
     # posts - is this necessary? Not in Local Library. Would probably only need the titles of the posts
@@ -50,15 +44,15 @@ class User(models.Model):
     # comment = models.ForeignKey('Comment', on_delete=models.SET_NULL, null=True)
 
     def get_absolute_url(self):
-        return reverse('user-detail', args=[str(self.id)])
+        return reverse('author-detail', args=[str(self.id)])
 
     def __str__(self):
         return self.name
 
 class Comment(models.Model):
 
-    # user posting a comment. one to many
-    user = models.ForeignKey('User', on_delete=models.SET_NULL)
+    # author posting a comment. one to many
+    author = models.ForeignKey('Author', on_delete=models.SET_NULL, related_name="comments")
 
     # text of comment
     content = models.TextField(max_length=500)
@@ -66,9 +60,7 @@ class Comment(models.Model):
     # date and time of post
     comment_date_added = models.DateTimeField(auto_now_add=True)
 
-    vote = models.ForeignKey('Vote', on_delete=models.SET_NULL, related_name="votes")
-
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name="comments")
 
     class Meta:
         ordering = ['-comment_date_added']
@@ -78,9 +70,9 @@ class Comment(models.Model):
 
 class Vote(models.Model):
 
-    # user voting. one to many
-    user = models.ForeignKey('User', on_delete=models.SET_NULL)
+    # author voting. one to many
+    # author = models.ForeignKey('Author', on_delete=models.SET_NULL)
 
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name="votes")
 
-    comment = models.ForeignKey('Comment', on_delete=models.SET_NULL, related_name="comments")
+    comment = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="votes")
