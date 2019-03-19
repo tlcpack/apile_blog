@@ -17,12 +17,12 @@
         <div class='profilebuttons'>
             {% if user.is_authenticated %}
                 <h3>{{ user.username }}</h3>
-                <h3>|</h3>
-                <h3><a href="">Logout</a></h3>
+                <h3> | </h3>
+                <h3><a href="{% url 'auth_logout' %}">Logout</a></h3>
             {% else %}
-                <h3><a href="">Register</a></h3>
-                <h3>|</h3>
-                <h3><a href="">Login</a></h3>
+                <h3><a href="{% url 'registration_register' %}">Register</a></h3>
+                <h3> | </h3>
+                <h3><a href="{% url 'auth_login' %}">Login</a></h3>
             {% endif %}
         </div>
     </header>
