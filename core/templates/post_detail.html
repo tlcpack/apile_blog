@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+<h3><a href=''>{{ post.title }}</a></h3>
+<p>posted by <a href=''>{{ post.author }}</a> on {{ post.date_added }}</p>
+<br>
+<p>{{ post.content }}</p>
+
+<br>
+<br>
+
+{% for comment in post.comments.all %}
+    <p><a href=''>{{ comment.user.username }}</a> on {{ comment.date_added }}</p>
+    <p>{{ comment.content }}<p>
+{% endfor %}
