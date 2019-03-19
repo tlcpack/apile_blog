@@ -21,6 +21,8 @@ class Post(models.Model):
 
     # date and time of post
     date_added = models.DateTimeField(auto_now_add=True)
+
+    favorited_by = models.ManyToManyField('Author', related_name="favorite_posts")
     
     # adjusting the ordering so most recent is on top
     class Meta:
@@ -62,17 +64,11 @@ class Comment(models.Model):
 
     post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name="comments")
 
+    favorited_by = models.ManyToManyField(Author, related_name="favorite_comments")
+
     class Meta:
         ordering = ['-comment_date_added']
 
     def __str__(self):
         return self.content
 
-class Vote(models.Model):
-
-    # author voting. one to many
-    # author = models.ForeignKey('Author', on_delete=models.SET_NULL)
-
-    post = models.ForeignKey('Post', on_delete=models.CASCADE, related_name="votes")
-
-    comment = models.ForeignKey('Comment', on_delete=models.CASCADE, related_name="votes")
