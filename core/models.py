@@ -74,7 +74,7 @@ class Comment(models.Model):
         ordering = ['-comment_date_added']
 
     def __str__(self):
-        return self.description
+        return self.content
 
 class Vote(models.Model):
 
@@ -82,3 +82,5 @@ class Vote(models.Model):
     user = models.ForeignKey('User', on_delete=models.SET_NULL)
 
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
+
+    comment = models.ForeignKey('Comment', on_delete=models.SET_NULL, related_name="comments")
