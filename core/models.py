@@ -54,7 +54,7 @@ class Author(models.Model):
 class Comment(models.Model):
 
     # author posting a comment. one to many
-    author = models.ForeignKey('Author', on_delete=models.SET_NULL, related_name="comments")
+    author = models.ForeignKey('Author', on_delete=models.SET_NULL, related_name="comments", null=True)
 
     # text of comment
     content = models.TextField(max_length=500)
