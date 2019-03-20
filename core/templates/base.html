@@ -13,7 +13,7 @@
 <body style="background-color:RGB(245,245,245);">
 
     <header>
-        <h1><a href=''>Apile</a></h1>
+        <h1><a href="{% url 'index' %}">Apile</a></h1>
         <div class='profilebuttons'>
             {% if user.is_authenticated %}
                 <h3>{{ user.username }}</h3>

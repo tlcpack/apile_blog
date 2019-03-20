@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 
-<h3><a href=''>{{ post.title }}</a></h3>
-<p>posted by <a href=''>{{ post.author }}</a> on {{ post.date_added }}</p>
+{% block content %}
+<h3><a href='{{ post.url }}'>{{ post.title }}</a></h3>
+<p>posted by <a href="{% url 'author-detail' post.author.pk %}">{{ post.author }}</a> on {{ post.date_added }}</p>
 <br>
 <p>{{ post.content }}</p>
 
@@ -12,3 +13,5 @@
     <p><a href=''>{{ comment.author.name }}</a> on {{ comment.comment_date_added }}</p>
     <p>{{ comment.content }}<p>
 {% endfor %}
+
+{% endblock %}
