@@ -2,7 +2,7 @@
 
 {% block content %}
 <h3><a href='{{ post.url }}'>{{ post.title }}</a></h3>
-<p>posted by <a href=''>{{ post.author }}</a> on {{ post.date_added }}</p>
+<p>posted by <a href="{% url 'author-detail' post.author.pk %}">{{ post.author }}</a> on {{ post.date_added }}</p>
 <br>
 <p>{{ post.content }}</p>
 
