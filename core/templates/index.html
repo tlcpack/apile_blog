@@ -6,5 +6,7 @@
     <span>Submitted by <a href="{% url 'author-detail' post.author.pk %}">{{ post.author.name }}</a> on {{ post.date_added }}</span>
     <span>|</span>
     <span><a href='{{ post.get_absolute_url }}'>{{ post.comments.all.count }} comments</a></span>
+    <span>|</span>
+    <span>{{ post.favorited_by.count }} favorites</span>
 {% endfor %}
 {% endblock %}
