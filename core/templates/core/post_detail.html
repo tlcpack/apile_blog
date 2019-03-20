@@ -11,7 +11,7 @@
 
 {% for comment in post.comments.all %}
     <div class='comment'>
-        <p><a href=''>{{ comment.author.name }}</a> on {{ comment.comment_date_added }}</p>
+        <p><a href="{% url 'author-detail' comment.author.pk %}">{{ comment.author.name }}</a> on {{ comment.comment_date_added }}</p>
         <p>{{ comment.content }}<p>
         <p>{{ comment.favorited_by.count }} favorites</p>
         <br>
