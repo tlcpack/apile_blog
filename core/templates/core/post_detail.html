@@ -2,7 +2,7 @@
 
 {% block content %}
 <h3><a href='{{ post.url }}'>{{ post.title }}</a></h3>
-<p>posted by <a href="{% url 'author-detail' post.author.pk %}">{{ post.author }}</a> on {{ post.date_added }}</p>
+<p>posted by <a href="{% url 'user-detail' post.author.pk %}">{{ post.author }}</a> on {{ post.date_added }}</p>
 <br>
 <p>{{ post.content }}</p>
 
@@ -11,7 +11,7 @@
 
 {% for comment in post.comments.all %}
     <div class='comment'>
-        <p><a href="{% url 'author-detail' comment.author.pk %}">{{ comment.author.name }}</a> on {{ comment.comment_date_added }}</p>
+        <p><a href="{% url 'user-detail' comment.author.pk %}">{{ comment.author.username }}</a> on {{ comment.comment_date_added }}</p>
         <p>{{ comment.content }}<p>
         <p>{{ comment.favorited_by.count }} favorites</p>
         <br>
