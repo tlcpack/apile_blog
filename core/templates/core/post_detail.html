@@ -10,8 +10,12 @@
 <br>
 
 {% for comment in post.comments.all %}
-    <p><a href=''>{{ comment.author.name }}</a> on {{ comment.comment_date_added }}</p>
-    <p>{{ comment.content }}<p>
+    <div class='comment'>
+        <p><a href="{% url 'author-detail' comment.author.pk %}">{{ comment.author.name }}</a> on {{ comment.comment_date_added }}</p>
+        <p>{{ comment.content }}<p>
+        <p>{{ comment.favorited_by.count }} favorites</p>
+        <br>
+    </div>
 {% endfor %}
 
 {% endblock %}

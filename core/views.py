@@ -10,7 +10,7 @@ class Index(generic.ListView):
     Generic class-based view for a list of all posts.
     """
     model = Post
-    paginate_by = 10
+    paginate_by = 5
 
 class PostDetailView(generic.DetailView):
     """
