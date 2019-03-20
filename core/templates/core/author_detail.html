@@ -3,4 +3,11 @@
 {% block content %}
 <h3>Author: {{ author.name }}</h3>
 
+{% for post in author.posts.all %}
+    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    <span>Submitted by <a href="{% url 'author-detail' post.author.pk %}">{{ post.author.name }}</a> on {{ post.date_added }}</span>
+    <span>|</span>
+    <span><a href='{{ post.get_absolute_url }}'>{{ post.comments.all.count }} comments</a></span>
+{% endfor %}
+
 {% endblock %}

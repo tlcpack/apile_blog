@@ -67,7 +67,7 @@ class Comment(models.Model):
     favorited_by = models.ManyToManyField(Author, related_name="favorite_comments")
 
     class Meta:
-        ordering = ['-comment_date_added']
+        ordering = ['comment_date_added']
 
     def __str__(self):
         return self.content
