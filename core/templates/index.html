@@ -8,7 +8,7 @@
     <span><a href='{{ post.get_absolute_url }}'>{{ post.comments.all.count }} comments</a></span>
     
     <span>
-    <form action="{% url 'post_favorite' post_pk=post.pk %}" method="POST">
+    <form action="{% url 'post_favorite' pk=post.pk %}" method="POST">
         {% csrf_token %}
         <button class='favorite_submit_button' type="submit">
             {% if post in request.user.favorite_posts.all %}

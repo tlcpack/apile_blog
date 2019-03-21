@@ -2,13 +2,14 @@
 
 from django.db import migrations
 from django.conf import settings
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 import os.path
 import csv
 
 def load_posts(apps, schema_editor):
     """Read CSV file of data and add it to the post website"""
     Post = apps.get_model('core', 'Post')
+    User = apps.get_model('auth', 'User')
 
     datapath = os.path.join(settings.BASE_DIR, 'initial_data')
     datafile = os.path.join(datapath, 'posts.csv')
@@ -22,6 +23,8 @@ def load_posts(apps, schema_editor):
                 for user_string in row['users_who_favorited'].split('/'):
                     favorite_user, _ = User.objects.get_or_create(username=user_string)
                     users_who_favorited.append(favorite_user)
+                    
+
 
             post_author, created = User.objects.get_or_create(username=row['author'])
             print(post_author,'pk',post_author.pk, created)
