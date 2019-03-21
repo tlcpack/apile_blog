@@ -5,4 +5,5 @@ urlpatterns = [
     path('', views.Index.as_view(), name='index'),
     path('core/post/<int:pk>', views.PostDetailView.as_view(), name='post-detail'),
     path('core/author/<int:pk>', views.AuthorDetailView.as_view(), name='author-detail'),
+    path('core/comment/new/', views.comment_new, name='comment_new'),
 ]

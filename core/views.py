@@ -4,6 +4,7 @@ from django.shortcuts import render
 
 from django.views import generic
 from .models import Post, Author
+from .forms import CommentForm
 
 class Index(generic.ListView):
     """
@@ -23,3 +24,7 @@ class AuthorDetailView(generic.DetailView):
     Generic detail view for an author
     """
     model = Author
+
+def comment_new(request):
+    form = CommentForm()
+    return render(request, '/comment_new.html', {'form':form})
