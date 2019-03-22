@@ -9,7 +9,7 @@ from django.views.decorators.http import require_http_methods
 
 from django.views import generic
 from .models import Post, Comment
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 
 class Index(generic.ListView):
     """
@@ -64,6 +64,19 @@ def comment_favorite_view(request, pk):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+# form page for creating a post
+@login_required
+def post_new(request):
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+            return redirect('post-detail', pk=post.pk)
+    else:
+        form = PostForm()
+    return render(request, 'post_edit.html', {'form': form})
 
 # form page for submitting comment
 @login_required
