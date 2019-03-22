@@ -8,7 +8,7 @@ from django.views.decorators.http import require_http_methods
 # Create your views here.
 
 from django.views import generic
-from .models import Post
+from .models import Post, Comment
 from .forms import CommentForm
 
 class Index(generic.ListView):
@@ -47,6 +47,22 @@ def post_favorite_view(request, pk):
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+
+@require_http_methods(['POST'])
+@login_required
+def comment_favorite_view(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    # We want to toggle whether this comment is favorited.
+    # If we find a favorite with this user and comment (i.e. it is not created
+    # prior to this moment) then delete that favorite, otherwise create it.
+    
+    if comment in request.user.favorite_comments.all():
+        request.user.favorite_comments.remove(comment)
+    else:
+        request.user.favorite_comments.add(comment)
+
+    return redirect(request.META.get('HTTP_REFERER', '/'))
 
 
 # form page for submitting comment

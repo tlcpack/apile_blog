@@ -25,8 +25,17 @@
     <div class='comment'>
         <p><a href="{% url 'user-detail' comment.author.pk %}">{{ comment.author.username }}</a> on {{ comment.comment_date_added }}</p>
         <p>{{ comment.content }}<p>
-        <p>{{ comment.favorited_by.count }} favorites</p>
-        <br>
+        <form action="{% url 'comment_favorite' pk=comment.pk%}" method="POST">
+            {% csrf_token %}
+            <button class='favorite_submit_button' type="submit">
+                {% if comment in request.user.favorite_comments.all %}
+                {{ comment.favorited_by.count }} ❤️
+                {% else %}
+                {{ comment.favorited_by.count }} ♡
+                {% endif %}
+            </button>
+            <input type="hidden" name="next" value="{{ request.path }}">
+        </form>
     </div>
 {% endfor %}
 
