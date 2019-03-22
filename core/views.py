@@ -18,6 +18,17 @@ class Index(generic.ListView):
     model = Post
     paginate_by = 5
 
+    def get_queryset(self):
+        """
+        This function changes the set of data that is retrieved from 
+        the database by looking at the get parameters.
+        """
+        self.sort = self.request.GET.get('sort')
+        post_list=self.queryset
+        post_list=post_list.annotate(fav_count=Count('favorited_by'))
+        if self.sort in ['favorites', 'date-created']:
+            post_list=post_list.order_by(F(self.sort).desc(nulls_last=True))
+
 class PostDetailView(generic.DetailView):
     """
     Generic detail view for a post
