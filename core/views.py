@@ -9,6 +9,7 @@ from django.views.decorators.http import require_http_methods
 
 from django.views import generic
 from .models import Post, Comment
+from django.db.models import Count, F
 from .forms import CommentForm, PostForm
 
 class Index(generic.ListView):
@@ -17,6 +18,21 @@ class Index(generic.ListView):
     """
     model = Post
     paginate_by = 5
+    queryset = Post.objects.all()
+
+    def get_queryset(self):
+        """
+        This function changes the set of data that is retrieved from 
+        the database by looking at the get parameters.
+        """
+        self.sort = self.request.GET.get('sort')
+        post_list=self.queryset
+        post_list=post_list.annotate(favorites=Count('favorited_by'))
+
+        if self.sort in ['favorites', 'date_added']:
+            post_list=post_list.order_by(F(self.sort).desc(nulls_last=True))
+
+        return post_list
 
 class PostDetailView(generic.DetailView):
     """
