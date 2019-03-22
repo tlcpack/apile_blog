@@ -10,6 +10,14 @@
     {% block meta %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+     </ul>
+    {% endif %}
 <body style="background-color:RGB(245,245,245);">
 
     <header>
