@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<div class="add-post">
+    <h2><a href="{% url 'post_new' %}" class="">Post something!</a><h2>
 {% for post in post_list %}
     <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
     <span>Submitted by <a href="{% url 'user-detail' post.author.pk %}">{{ post.author.username }}</a> on {{ post.date_added }}</span>
