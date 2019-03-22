@@ -10,6 +10,8 @@ from django.views.decorators.http import require_http_methods
 from django.views import generic
 from .models import Post, Comment
 from .forms import CommentForm
+from django.db.models import Count, F
+
 
 class Index(generic.ListView):
     """
@@ -17,6 +19,7 @@ class Index(generic.ListView):
     """
     model = Post
     paginate_by = 5
+    queryset = Post.objects.all()
 
     def get_queryset(self):
         """
@@ -25,9 +28,12 @@ class Index(generic.ListView):
         """
         self.sort = self.request.GET.get('sort')
         post_list=self.queryset
-        post_list=post_list.annotate(fav_count=Count('favorited_by'))
-        if self.sort in ['favorites', 'date-created']:
+        post_list=post_list.annotate(favorites=Count('favorited_by'))
+
+        if self.sort in ['favorites', 'date_added']:
             post_list=post_list.order_by(F(self.sort).desc(nulls_last=True))
+
+        return post_list
 
 class PostDetailView(generic.DetailView):
     """
