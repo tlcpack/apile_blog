@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from .views import BlogDeleteView
+
 
 urlpatterns = [
     path('', views.Index.as_view(), name='index'),
@@ -9,4 +11,5 @@ urlpatterns = [
     path('post/<int:pk>/comment_new/', views.comment_new, name='comment_new'),
     path('comment/<int:pk>', views.comment_favorite_view, name='comment_favorite'),
     path('post/new/', views.post_new, name='post_new'),
+    path('post/<int:pk>/delete/', BlogDeleteView.as_view(), name='post_delete'),
 ]
