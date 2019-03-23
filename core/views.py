@@ -36,6 +36,12 @@ class Index(generic.ListView):
 
         return post_list
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['sort']=self.sort
+        return context
+        
+
 class PostDetailView(generic.DetailView):
     """
     Generic detail view for a post
