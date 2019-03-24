@@ -36,6 +36,7 @@
             </button>
             <input type="hidden" name="next" value="{{ request.path }}">
         </form>
+        <p><a href="{% url 'comment_delete' post.pk %}">Delete Comment</a></p>
     </div>
 {% endfor %}
 

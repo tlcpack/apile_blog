@@ -122,3 +122,8 @@ class BlogDeleteView(generic.DeleteView):
     model = Post
     template_name = "post_delete.html"
     success_url = reverse_lazy('index')
+
+class CommentDeleteView(generic.DeleteView):
+    model = Comment
+    template_name = "comment_delete.html"
+    success_url = reverse_lazy('index')
