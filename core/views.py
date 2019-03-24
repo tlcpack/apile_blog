@@ -168,3 +168,15 @@ def post_delete(request, pk):
 #         }
 
 #     return render(request, 'comment_delete.html', context)
+
+@login_required
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+
+    if request.method == "GET":
+        post=comment.post
+        comment.delete()
+        messages.success(request, "Comment successfully deleted!")
+        return redirect('post-detail', pk=post.pk)
+
+    return render(request, 'comment_delete.html', {'comment': comment})
