@@ -2,15 +2,15 @@
 
 {% block content %}
 
-{% if request.user == creator %}
+{% if request.user == post.author %}
     <h1>Delete post</h1>
     <form action="" method="POST">{% csrf_token %}
       <p>Are you sure you want to delete "{{ post.title }}"?</p>
       <input type="submit" value="Confirm" />
     </form>
 
-{% elif request.user != creator %}
-<h1>You cannot delete this entry</h1>
+{% elif request.user != post.author %}
+<h2>You cannot delete this entry</h2>
 
 {% endif %}
 

@@ -1,9 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
+{% if request.user == comment.author %}
     <h1>Delete comment</h1>
-    <form action="" method="post">{% csrf_token %}
+    <form action="" method="POST">{% csrf_token %}
       <p>Are you sure you want to delete your comment?</p>
       <input type="submit" value="Confirm" />
     </form>
+
+{% elif request.user != comment.author %}
+<h2>You cannot delete this entry</h2>
+
+{% endif %}
 {% endblock content %}
