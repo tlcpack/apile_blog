@@ -8,6 +8,17 @@
     <span>Submitted by <a href="{% url 'user-detail' post.author.pk %}">{{ post.author.username }}</a> on {{ post.date_added }}</span>
     <span>|</span>
     <span><a href='{{ post.get_absolute_url }}'>{{ post.comments.all.count }} comments</a></span>
+    <form action="{% url 'post_favorite' pk=post.pk %}" method="POST">
+        {% csrf_token %}
+        <button class='favorite_submit_button' type="submit">
+            {% if post in request.user.favorite_posts.all %}
+            {{ post.favorited_by.count }} ❤️
+            {% else %}
+            {{ post.favorited_by.count }} ♡
+            {% endif %}
+        </button>
+        <input type="hidden" name="next" value="{{ request.path }}">
+    </form>
 {% endfor %}
 
 {% endblock %}

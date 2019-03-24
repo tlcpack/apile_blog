@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h3><a href='{{ post.url }}'>{{ post.title }}</a></h3>
+<h3>
+{% if post.url|length > 0 %}
+        <a href='{{ post.url }}'>{{ post.title }}</a></h3>
+    {% else %}
+        {{ post.title }}</h3>
+    {% endif %}
 <p>posted by <a href="{% url 'user-detail' post.author.pk %}">{{ post.author }}</a> on {{ post.date_added }}</p>
 <form action="{% url 'post_favorite' pk=post.pk %}" method="POST">
     {% csrf_token %}
