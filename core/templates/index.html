@@ -12,7 +12,12 @@
 <div class="add-post">
     <h2><a href="{% url 'post_new' %}" class="">Post something!</a><h2>
 {% for post in post_list %}
-    <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+    <h3>
+    {% if post.url|length > 0 %}
+        <a href='{{ post.url }}'>{{ post.title }}</a></h3>
+    {% else %}
+        <a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h3>
+    {% endif %}
     <span>Submitted by <a href="{% url 'user-detail' post.author.pk %}">{{ post.author.username }}</a> on {{ post.date_added }}</span>
     <span>|</span>
     <span><a href='{{ post.get_absolute_url }}'>{{ post.comments.all.count }} comments</a></span>

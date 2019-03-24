@@ -18,7 +18,7 @@ class Post(models.Model):
     content = models.TextField(max_length=1000)
 
     # URL link
-    url = models.URLField(max_length=255)
+    url = models.URLField(blank=True, null=True, help_text="www.website.com")
 
     # date and time of post
     date_added = models.DateTimeField(auto_now_add=True)
