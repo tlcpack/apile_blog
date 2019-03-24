@@ -3,17 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
 # from django.views.generic.edit import DeleteView
-
-
-
-# Create your views here.
-
 from django.views import generic
 from .models import Post, Comment
 from django.db.models import Count, F
 from .forms import CommentForm, PostForm
 # from django.urls import reverse_lazy
 from django.contrib import messages
+from django.core.paginator import Paginator
 # from django.http import HttpResponseRedirect
 
 class Index(generic.ListView):
@@ -49,6 +45,20 @@ class PostDetailView(generic.DetailView):
     Generic detail view for a post
     """
     model = Post
+
+    def get_context_data(self, **kwargs):
+        """
+        Change the context to include only the comments on the particular page
+        """
+
+        post_instance = Post.objects.get(pk=self.get_object().pk)
+        comments = post_instance.comments.all()
+        paginator = Paginator(comments, 5)
+        page = self.request.GET.get('page', 1)
+        comments = paginator.get_page(page)
+        context = super().get_context_data(**kwargs)
+        context['comments'] = comments
+        return context
 
 class AuthorDetailView(generic.DetailView):
     """
