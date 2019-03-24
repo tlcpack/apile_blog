@@ -35,5 +35,9 @@
         <input type="hidden" name="next" value="{{ request.path }}">
     </form>
     </span>
+    
+    {% if user == post.author %}
+        <span> | <a href="{% url 'post_delete' post.pk %}">Delete Blog Post</a></span>
+    {% endif %}
 {% endfor %}
 {% endblock %}

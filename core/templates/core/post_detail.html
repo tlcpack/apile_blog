@@ -42,11 +42,15 @@
             </button>
             <input type="hidden" name="next" value="{{ request.path }}">
         </form>
-        <p><a href="{% url 'comment_delete' comment.pk %}">Delete Comment</a></p>
+        {% if user == comment.author %}
+            <p><a href="{% url 'comment_delete' comment.pk %}">Delete Comment</a></p>
+        {% endif %}
     </div>
 {% endfor %}
 
-<p><a href="{% url 'post_delete' post.pk %}">Delete Blog Post</a></p>
+{% if user == post.author %}
+    <p><a href="{% url 'post_delete' post.pk %}">Delete Blog Post</a></p>
+{% endif %}
 <a href=""
 
 {% endblock %}
