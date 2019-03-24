@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
-from django.views.generic.edit import DeleteView
+# from django.views.generic.edit import DeleteView
 from django.views import generic
 from .models import Post, Comment
 from django.db.models import Count, F
 from .forms import CommentForm, PostForm
-from django.urls import reverse_lazy
+# from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.paginator import Paginator
 # from django.http import HttpResponseRedirect
@@ -137,10 +137,10 @@ def comment_new(request, pk):
 #     template_name = "post_delete.html"
 #     success_url = reverse_lazy('index')
 
-class CommentDeleteView(generic.DeleteView):
-    model = Comment
-    template_name = "comment_delete.html"
-    success_url = reverse_lazy('index')
+# class CommentDeleteView(generic.DeleteView):
+#     model = Comment
+#     template_name = "comment_delete.html"
+#     success_url = reverse_lazy('index')
 
 @login_required
 def post_delete(request, pk):
@@ -179,11 +179,12 @@ def post_delete(request, pk):
 
 #     return render(request, 'comment_delete.html', context)
 
+
 @login_required
 def comment_delete(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
 
-    if request.method == "GET":
+    if request.method == "POST":
         post=comment.post
         comment.delete()
         messages.success(request, "Comment successfully deleted!")
