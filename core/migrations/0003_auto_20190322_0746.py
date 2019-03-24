@@ -26,7 +26,7 @@ def load_comments(apps, schema_editor):
 
             comment_author, _ = User.objects.get_or_create(username=row['author'])
 
-            post = Post.objects.get(title = row['post_title'])
+            post = Post.objects.filter(title = row['post_title'])[0]
 
             comment = post.comments.create(                
                 content = row['content'],
