@@ -47,6 +47,11 @@ class PostDetailView(generic.DetailView):
     Generic detail view for a post
     """
     model = Post
+    post_instance = Post.objects.get(pk=pk_url_kwarg)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 class AuthorDetailView(generic.DetailView):
     """
