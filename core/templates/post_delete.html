@@ -1,9 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+{% if request.user == creator %}
     <h1>Delete post</h1>
-    <form action="" method="post">{% csrf_token %}
+    <form action="" method="POST">{% csrf_token %}
       <p>Are you sure you want to delete "{{ post.title }}"?</p>
       <input type="submit" value="Confirm" />
     </form>
+
+{% elif request.user != creator %}
+<h1>You cannot delete this entry</h1>
+
+{% endif %}
+
+
 {% endblock content %}

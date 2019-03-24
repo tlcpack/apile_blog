@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_http_methods
-from django.views.generic.edit import DeleteView
+# from django.views.generic.edit import DeleteView
 
 
 
@@ -13,6 +13,8 @@ from .models import Post, Comment
 from django.db.models import Count, F
 from .forms import CommentForm, PostForm
 from django.urls import reverse_lazy
+from django.contrib import messages
+# from django.http import HttpResponseRedirect
 
 class Index(generic.ListView):
     """
@@ -118,12 +120,29 @@ def comment_new(request, pk):
         form = CommentForm()
     return render(request, 'comment_new.html', {'form':form, 'post':post})
 
-class BlogDeleteView(generic.DeleteView):
-    model = Post
-    template_name = "post_delete.html"
-    success_url = reverse_lazy('index')
+# class BlogDeleteView(generic.DeleteView):
+#     model = Post
+#     template_name = "post_delete.html"
+#     success_url = reverse_lazy('index')
 
-class CommentDeleteView(generic.DeleteView):
-    model = Comment
-    template_name = "comment_delete.html"
-    success_url = reverse_lazy('index')
+# class CommentDeleteView(generic.DeleteView):
+#     model = Comment
+#     template_name = "comment_delete.html"
+#     success_url = reverse_lazy('index')
+
+@login_required
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    creator = post.author
+
+    if request.method == "POST" and request.user == creator:
+        post.delete()
+        messages.success(request, "Post successfully deleted!")
+        return redirect('index')
+
+    context = {
+        'post': post,
+        'creator': creator,
+        }
+
+    return render(request, 'post_delete.html', context)
