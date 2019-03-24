@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <h3>
 {% if post.url|length > 0 %}
         <a href='{{ post.url }}'>{{ post.title }}</a></h3>
@@ -26,7 +27,7 @@
 <a href="{% url 'comment_new' pk=post.pk %}">Add your comment</a>
 <br>
 
-{% for comment in post.comments.all %}
+{% for comment in comments %}
     <div class='comment'>
         <p><a href="{% url 'user-detail' comment.author.pk %}">{{ comment.author.username }}</a> on {{ comment.comment_date_added }}</p>
         <p>{{ comment.content }}<p>
@@ -49,3 +50,21 @@
 <a href=""
 
 {% endblock %}
+
+{% block pagination %}
+    <div class="step_links">
+        {% if comments.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ comments.previous_page_number }}"> previous </a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ comments.number }} of {{ comments.paginator.num_pages }}
+        </span>
+
+        {% if comments.has_next %}
+            <a href="?page={{ comments.next_page_number }}"> next</a>
+            <a href="?page={{ comments.paginator.num_pages }}"> last &raquo;</a>
+        {% endif %}
+    </div>
+{% endblock %} 
