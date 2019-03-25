@@ -6,14 +6,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% block meta %}{% endblock %}
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}Apile{% endblock %}</title>
 </head>
 <body style="background-color:RGB(245,245,245);">
 
-    <header>
-        <h1><a href="{% url 'index' %}">Apile</a></h1>
+    <header style="display: flex;
+    flex-wrap: wrap;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    justify-content: space-around;
+    border-style: ridge;
+    border-color: black;
+    border-radius: 10px;">
+        <h2><a href="{% url 'index' %}">Apile</a></h2>
         <div class='profilebuttons'>
             {% if user.is_authenticated %}
                 <h3><a href="{% url 'user-detail' user.pk %}">{{ user.username }}</a></h3>
@@ -45,7 +51,7 @@
 
     {% block pagination %}
         {% if is_paginated %}
-            <div class="pagination">
+            <div class="pagination" style="text-align:center;">
                 <span class="page-links">
                     {% if page_obj.has_previous %}
                         <a href="{{ request.path }}?sort={{ sort }}&page={{ page_obj.previous_page_number }}">previous</a>
