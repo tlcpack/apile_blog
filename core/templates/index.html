@@ -38,7 +38,9 @@
     </span>
     
     {% if user == post.author %}
-        <span> | <a href="{% url 'post_delete' post.pk %}">Delete Blog Post</a></span>
+        <span><a href="{% url 'post_delete' post.pk %}">Delete Blog Post</a></span>
     {% endif %}
+    <br>
+    <br>
 {% endfor %}
 {% endblock %}
