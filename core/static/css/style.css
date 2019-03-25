@@ -1,5 +1,7 @@
 * {
-    transition: all 6s ease;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .profilebuttons {
@@ -21,6 +23,10 @@
 .comment {
     border-top-style: solid;
     border-top-width: 1px;
+}
+
+.new_post {
+    transition: all 6s ease;
 }
 
 .new_post:link, .new_post:visited{
