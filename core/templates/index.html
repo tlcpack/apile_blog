@@ -3,20 +3,21 @@
 {% load querystring %}
 
 {% block content %}
-<div class='sort-by'>
+<div class='sort-by' style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <br><br>Sort by: 
     <a href="{% replace_GET_param request 'sort' 'favorites' %}">Most Favorited</a> | 
     <a href="{% replace_GET_param request 'sort' 'date_added' %}">Date Created</a>
 </div>
 
 
-<div class="add-post">
-    <h2><a href="{% url 'post_new' %}" class="">Post something!</a><h2>
+<div style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+    <br><br><h2><a href="{% url 'post_new' %}" class="new_post" >Post something!</a><h2><br>
 {% for post in post_list %}
     <h3>
     {% if post.url|length > 0 %}
-        <a href='{{ post.url }}'>{{ post.title }}</a></h3>
+        <a href='{{ post.url }}' class="post_title">{{ post.title }}</a></h3>
     {% else %}
-        <a href='{{ post.get_absolute_url }}'>{{ post.title }}</a></h3>
+        <a href='{{ post.get_absolute_url }}' class="post_title">{{ post.title }}</a></h3>
     {% endif %}
     <span>Submitted by <a href="{% url 'user-detail' post.author.pk %}">{{ post.author.username }}</a> on {{ post.date_added }}</span>
     <span>|</span>

@@ -8,7 +8,7 @@
     {% else %}
         {{ post.title }}</h3>
     {% endif %}
-<p>posted by <a href="{% url 'user-detail' post.author.pk %}">{{ post.author }}</a> on {{ post.date_added }}</p>
+<p style="font-style:italic;">posted by <a href="{% url 'user-detail' post.author.pk %}" style="font-size:smaller;text-transform:uppercase;">{{ post.author }}</a> on {{ post.date_added }}</p>
 <form action="{% url 'post_favorite' pk=post.pk %}" method="POST">
     {% csrf_token %}
     <button class='favorite_submit_button' type="submit">
@@ -56,13 +56,13 @@
 {% endblock %}
 
 {% block pagination %}
-    <div class="step_links">
+    <div class="step_links" style="text-align:center;">
         {% if comments.has_previous %}
             <a href="?page=1">&laquo; first</a>
             <a href="?page={{ comments.previous_page_number }}"> previous </a>
         {% endif %}
 
-        <span class="current">
+        <span class="current" style="text-align:center;">
             Page {{ comments.number }} of {{ comments.paginator.num_pages }}
         </span>
 

@@ -1,0 +1,75 @@
+* {
+    transition: all 6s ease;
+}
+
+.profilebuttons {
+    display: flex;
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    justify-content: space-around;
+}
+
+.body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    background-color:RGB(245,245,245);
+    
+}
+.comment {
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.new_post:link, .new_post:visited{
+    color:lightcoral;
+    text-align: center;
+    text-decoration: underline overline;
+    border-style: double;
+    border-radius: 10px;
+    padding: 14px;
+    margin: 18px;
+}
+
+.new_post:hover {
+    background: linear-gradient(rgba(78, 78, 78, .2),rgba(165, 42, 42, 0.2));
+    /* color: white; */
+    box-shadow: inset 0 0 0 4px rgba(165, 42, 42, 0.863);
+}
+
+
+
+.favorite_submit_button {
+    background: transparent;
+    border-style: none;
+    font: bold 15px arial, sans-serif;
+    text-shadow:none;
+    height:30px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+    outline: none;
+    border: none;
+}
+
+.favorite_submit_button:hover {
+    cursor: pointer;
+}
+
+.favorite_submit_button:active {
+    border-style:outset;
+    border:none;
+}
+
+.submit_button {
+    border-radius: 5px;
+    padding: 5px;
+}
+.submit_button:hover {
+    background-color:lightblue;
+    
+}
