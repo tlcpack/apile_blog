@@ -12,14 +12,9 @@
 </head>
 <body style="background-color:RGB(245,245,245);">
 
-    <header style="display: flex;
-    flex-wrap: wrap;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    justify-content: space-around;
-    border-style: ridge;
-    border-color: black;
-    border-radius: 10px;">
-        <h2><a href="{% url 'index' %}">Apile</a></h2>
+    <header class="header">
+        <h2 class="title"><div>Apile</div></h2><p class="title">A blog for gamers</p>
+        <div class="title_bar"><div><h3><a href="{% url 'index' %}" class="profilebuttons">Home</a></h3></div>
         <div class='profilebuttons'>
             {% if user.is_authenticated %}
                 <h3><a href="{% url 'user-detail' user.pk %}">{{ user.username }}</a></h3>
@@ -31,6 +26,9 @@
                 <h3><a href="{% url 'auth_login' %}">Login</a></h3>
             {% endif %}
         </div>
+        </div>
+        
+
     </header>
 
     <div>
