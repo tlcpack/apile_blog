@@ -3,15 +3,16 @@
 {% load querystring %}
 
 {% block content %}
-<div class='sort-by' style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
+
+
+
+<div>
+    <br><br><div class="new_post_div"><h2><a href="{% url 'post_new' %}" class="new_post" >Post something!</a></h2></div><br>
+    <div class='sort-by'>
     <br><br>Sort by: 
-    <a href="{% replace_GET_param request 'sort' 'favorites' %}">Most Favorited</a> | 
-    <a href="{% replace_GET_param request 'sort' 'date_added' %}">Date Created</a>
+    <a href="{% replace_GET_param request 'sort' 'favorites' %}" class="sort">Most Favorited</a> | 
+    <a href="{% replace_GET_param request 'sort' 'date_added' %}" class="sort">Date Created</a>
 </div>
-
-
-<div style="font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;">
-    <br><br><h2><a href="{% url 'post_new' %}" class="new_post" >Post something!</a><h2><br>
 {% for post in post_list %}
     <h3>
     {% if post.url|length > 0 %}

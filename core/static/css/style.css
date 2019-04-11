@@ -1,7 +1,8 @@
 * {
-    max-width: 1000px;
+    max-width: 1100px;
     margin-left: auto;
     margin-right: auto;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 .profilebuttons {
@@ -9,14 +10,25 @@
 }
 
 .header {
+    border-style: ridge;
+    border-color: black;
+    border-radius: 30px;
+    margin: 15px;
+
+}
+
+.title_bar {
     display: flex;
-    flex-wrap: wrap;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding: 15px;
+}
+
+.title {
+    text-align: center;
 }
 
 .body {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; 
+    
     background-color:RGB(245,245,245);
     
 }
@@ -25,16 +37,19 @@
     border-top-width: 1px;
 }
 
-.new_post {
-    transition: all 6s ease;
+.new_post_div {
+    display: flex;
+    justify-content: center;
 }
+
+
 
 .new_post:link, .new_post:visited{
     color:lightcoral;
     text-align: center;
     text-decoration: underline overline;
     border-style: double;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 14px;
     margin: 18px;
 }
