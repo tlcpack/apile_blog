@@ -12,7 +12,7 @@
 .header {
     border-style: ridge;
     border-color: black;
-    border-radius: 10px;
+    border-radius: 30px;
     margin: 15px;
 
 }
@@ -49,7 +49,7 @@
     text-align: center;
     text-decoration: underline overline;
     border-style: double;
-    border-radius: 10px;
+    border-radius: 20px;
     padding: 14px;
     margin: 18px;
 }
