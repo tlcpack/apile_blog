@@ -1,3 +1,5 @@
+Check it out on heroku at https://shrouded-cove-96180.herokuapp.com/core/
+
 # Apile
 
 ![stack by Zach Bogart from the Noun Project](noun-stack.png)
